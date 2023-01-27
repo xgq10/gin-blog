@@ -1,0 +1,4 @@
+[INFO][auth.go:45]2023/01/26 20:30:58 [Username.Required. Username Can not be empty]
+[INFO][auth.go:45]2023/01/26 20:30:58 [Password.Required. Password Can not be empty]
+[INFO][main.go:34]2023/01/26 20:33:49 [Shutdown Server ...]
+[INFO][main.go:40]2023/01/26 20:33:49 [Server exiting]
