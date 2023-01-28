@@ -60,3 +60,8 @@ func EditArticle(id int, data interface{}) bool {
 	db.Model(&Article{}).Where("id=?", id).Updates(data)
 	return true
 }
+
+func CleanAllArticle() bool {
+	db.Unscoped().Where("deleted_on != ? ", 0).Delete(&Article{})
+	return true
+}

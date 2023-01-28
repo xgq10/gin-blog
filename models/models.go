@@ -52,9 +52,9 @@ func init() {
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
 
-	db.Callback().Delete().Replace("gorm:delete", deleteCallback)
 	db.Callback().Update().Replace("gorm:update_time_stamp", updateTimeStampForUpdateCallback)
 	db.Callback().Create().Replace("gorm:update_time_stamp", updateTimeStampForCreateCallBack)
+	db.Callback().Delete().Replace("gorm:delete", deleteCallback)
 }
 
 func CloseDB() {
@@ -90,9 +90,8 @@ func deleteCallback(scope *gorm.Scope) {
 		if str, ok := scope.Get("gorm:delete_option"); ok {
 			extraOption = fmt.Sprint(str)
 		}
-		deletedOnField, hasDeleteOnField := scope.FieldByName("DeleteOn")
-
-		if !scope.Search.Unscoped && hasDeleteOnField {
+		deletedOnField, hasDeletedOnField := scope.FieldByName("DeletedOn")
+		if !scope.Search.Unscoped && hasDeletedOnField {
 			scope.Raw(fmt.Sprintf(
 				"UPDATE %v SET %v=%v%v%v",
 				scope.QuotedTableName(),
@@ -111,7 +110,6 @@ func deleteCallback(scope *gorm.Scope) {
 		}
 	}
 }
-
 func addExtraSpaceIfExist(str string) string {
 	if str != "" {
 		return " " + str
