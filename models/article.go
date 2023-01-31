@@ -61,7 +61,10 @@ func EditArticle(id int, data interface{}) bool {
 	return true
 }
 
+// CleanAllArticle Cron定时模拟硬删除
 func CleanAllArticle() bool {
-	db.Unscoped().Where("deleted_on != ? ", 0).Delete(&Article{})
+	if err := db.Unscoped().Where("deleted_on != ? ", 0).Delete(&Article{}); err != nil {
+		return true
+	}
 	return true
 }

@@ -56,7 +56,10 @@ func AddTag(name string, state int, createdBy string) bool {
 	return true
 }
 
+// CleanAllTag Cron定时模拟硬删除
 func CleanAllTag() bool {
-	db.Unscoped().Where("deleted_on != ?", 0).Delete(&Tag{})
+	if err := db.Unscoped().Where("deleted_on != ?", 0).Delete(&Tag{}); err != nil {
+		return true
+	}
 	return true
 }
