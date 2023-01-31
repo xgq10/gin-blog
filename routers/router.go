@@ -3,17 +3,22 @@ package routers
 import (
 	_ "gin-blog/docs"
 	"gin-blog/middleware"
+	"gin-blog/routers/api"
 	"gin-blog/routers/api/v1"
+	"gin-blog/utils/upload"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/files"
 	gs "github.com/swaggo/gin-swagger"
+	"net/http"
 )
 
 func InitRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
 	r.GET("/auth", v1.GetAuth)
+	r.GET("/upload", api.UploadImage)
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 
 	tag := r.Group("/api/v1")

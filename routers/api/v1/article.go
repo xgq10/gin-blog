@@ -108,6 +108,7 @@ func AddArticle(c *gin.Context) {
 	desc := c.Query("desc")
 	content := c.Query("content")
 	createdBy := c.Query("created_by")
+	coverImageUrl := c.Query("cover_image_url")
 	state := com.StrTo(c.DefaultQuery("state", "0")).MustInt()
 
 	valid := validation.Validation{}
@@ -117,6 +118,8 @@ func AddArticle(c *gin.Context) {
 	valid.Required(content, "content").Message("内容不能为空")
 	valid.Required(createdBy, "created_by").Message("创建人不能为空")
 	valid.Range(state, 0, 1, "state").Message("状态只允许0或1")
+	valid.Required(coverImageUrl, "cover_image_url").Message("封面图片不能为空")
+	valid.Max(coverImageUrl, 100, "cover_image_url").Message("封面图片最长为100字符")
 
 	code := e.INVALID_PARAMS
 	if !valid.HasErrors() {
@@ -167,6 +170,7 @@ func EditArticle(c *gin.Context) {
 	desc := c.Query("desc")
 	content := c.Query("content")
 	modifiedBy := c.Query("modified_by")
+	coverImageUrl := c.Query("cover_image_url")
 
 	var state = -1
 	if arg := c.Query("state"); arg != "" {
@@ -179,6 +183,8 @@ func EditArticle(c *gin.Context) {
 	valid.MaxSize(content, 65535, "content").Message("内容最长为65535字符")
 	valid.Required(modifiedBy, "modified_by").Message("修改人不能为空")
 	valid.MaxSize(modifiedBy, 100, "modified_by").Message("修改人最长为100字符")
+	valid.Required(coverImageUrl, "cover_image_url").Message("封面图片不能为空")
+	valid.MaxSize(coverImageUrl, 100, "cover_image_url").Message("封面图片最长为100字符")
 
 	code := e.INVALID_PARAMS
 	if !valid.HasErrors() {

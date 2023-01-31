@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"gin-blog/utils/setting"
