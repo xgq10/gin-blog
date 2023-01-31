@@ -1,4 +1,4 @@
-package utils
+package main
 
 import (
 	"gin-blog/utils/setting"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var jwtSecret = []byte(setting.JWTSecret)
+var jwtSecret = []byte(setting.AppSetting.JwtSecret)
 
 type Claims struct {
 	Username string `json:"username"`

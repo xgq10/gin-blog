@@ -3,22 +3,31 @@ package main
 import (
 	"context"
 	"fmt"
+	"gin-blog/models"
 	"gin-blog/routers"
 	"gin-blog/utils/logging"
 	"gin-blog/utils/setting"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 )
 
+func init() {
+	setting.Setup()
+	models.Setup()
+	logging.Setup()
+}
+
 func main() {
+	gin.SetMode(setting.ServerSetting.RunMode)
 	router := routers.InitRouter()
 	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", setting.HttpPort),
+		Addr:           fmt.Sprintf(":%d", setting.ServerSetting.HttpPort),
 		Handler:        router,
-		ReadTimeout:    setting.ReadTimeout,
-		WriteTimeout:   setting.WriteTimeout,
+		ReadTimeout:    setting.ServerSetting.ReadTimeout,
+		WriteTimeout:   setting.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
 	go func() {
