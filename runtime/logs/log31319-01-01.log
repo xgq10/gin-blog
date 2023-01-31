@@ -1,0 +1,7 @@
+[WARN][upload.go:17]2023/01/31 21:10:16 [request Content-Type isn't multipart/form-data]
+[INFO][main.go:43]2023/01/31 21:19:44 [Shutdown Server ...]
+[INFO][main.go:49]2023/01/31 21:19:44 [Server exiting]
+[INFO][main.go:43]2023/01/31 21:25:05 [Shutdown Server ...]
+[INFO][main.go:49]2023/01/31 21:25:05 [Server exiting]
+[INFO][main.go:43]2023/01/31 21:38:23 [Shutdown Server ...]
+[INFO][main.go:49]2023/01/31 21:38:23 [Server exiting]
