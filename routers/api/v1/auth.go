@@ -21,7 +21,7 @@ type auth struct {
 // @Param username query string true "Username"
 // @Param password query string true "Password"
 // @Success 200 {string} json "{"code":200,"data":{},"msg":""}"
-// @Router /auth [get]
+// @Router /auth_service [get]
 func GetAuth(c *gin.Context) {
 	username := c.Query("username")
 	password := c.Query("password")
@@ -35,7 +35,7 @@ func GetAuth(c *gin.Context) {
 	data := make(map[string]interface{})
 	code := e.INVALID_PARAMS
 	if ok {
-		isExist := models.CheckAuth(username, password)
+		isExist, _ := models.CheckAuth(username, password)
 		if isExist {
 			token, err := utils.GenerateToken(username, password)
 			if err != nil {

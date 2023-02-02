@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gin-blog/models"
 	"gin-blog/routers"
+	"gin-blog/utils/gredis"
 	"gin-blog/utils/logging"
 	"gin-blog/utils/setting"
 	"github.com/gin-gonic/gin"
@@ -18,6 +19,7 @@ func init() {
 	setting.Setup()
 	models.Setup()
 	logging.Setup()
+	gredis.Setup()
 }
 
 func main() {

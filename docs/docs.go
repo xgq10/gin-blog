@@ -344,7 +344,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/auth": {
+        "/auth_service": {
             "get": {
                 "produces": [
                     "application/json"

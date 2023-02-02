@@ -17,7 +17,7 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
-	r.GET("/auth", v1.GetAuth)
+	r.GET("/auth_service", v1.GetAuth)
 	r.GET("/upload", api.UploadImage)
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 

@@ -53,6 +53,7 @@ func Setup() {
 	db.Callback().Delete().Replace("gorm:delete", deleteCallback)
 }
 
+// CloseDB closes database connection (unnecessary)
 func CloseDB() {
 	defer db.Close()
 }
