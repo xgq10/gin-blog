@@ -3,6 +3,7 @@ module gin-blog
 go 1.19
 
 require (
+	github.com/360EntSecGroup-Skylar/excelize v1.4.1
 	github.com/beego/beego/v2 v2.0.7
 	github.com/gin-gonic/gin v1.8.2
 	github.com/go-ini/ini v1.67.0
@@ -13,6 +14,7 @@ require (
 	github.com/swaggo/files v1.0.0
 	github.com/swaggo/gin-swagger v1.5.3
 	github.com/swaggo/swag v1.8.10
+	github.com/tealeg/xlsx v1.0.5
 	github.com/unknwon/com v1.0.1
 )
 
@@ -37,6 +39,7 @@ require (
 	github.com/mattn/go-isatty v0.0.17 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/shiena/ansicolor v0.0.0-20200904210342-c7312218db18 // indirect

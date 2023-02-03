@@ -5,6 +5,7 @@ import (
 	"gin-blog/middleware"
 	"gin-blog/routers/api"
 	"gin-blog/routers/api/v1"
+	"gin-blog/utils/export"
 	"gin-blog/utils/upload"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/files"
@@ -17,11 +18,13 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
+	r.StaticFS("/export", http.Dir(export.GetExcelFullPath()))
 	r.GET("/auth_service", v1.GetAuth)
 	r.GET("/upload", api.UploadImage)
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 
 	tag := r.Group("/api/v1")
+	tag.Use(middleware.JWT())
 	{
 		//获取标签列表
 		tag.GET("/tags", v1.GetTags)
@@ -31,6 +34,10 @@ func InitRouter() *gin.Engine {
 		tag.PUT("/tags/:id", v1.EditTag)
 		//删除指定标签
 		tag.DELETE("/tags/:id", v1.DeleteTag)
+		// 导出标签
+		tag.POST("/tags/export", v1.ExportTag)
+		// 导入标签
+		tag.POST("/tags/import", v1.ImportTag)
 	}
 
 	article := r.Group("/api/v1")
